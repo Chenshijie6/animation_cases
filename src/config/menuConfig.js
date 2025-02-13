@@ -54,6 +54,12 @@ export default [
         icon: 'IconMenu',
         component: 'Component8'
       },
+      {
+        index: '2-2',
+        title: '时光隧道穿梭',
+        icon: 'IconMenu',
+        component: 'Component9'
+      },
     ]
   },
   {

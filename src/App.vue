@@ -21,6 +21,7 @@ import Component5 from './components/页面/canvas案例/彩色大树.vue';
 import Component6 from './components/页面/canvas案例/星空夜景.vue';
 import Component7 from './components/页面/canvas案例/测试页.vue';
 import Component8 from './components/页面/css案例/月光沙漠.vue';
+import Component9 from './components/页面/css案例/时光隧道穿梭.vue';
 
 import menuConfig from './config/menuConfig';
 
@@ -32,7 +33,8 @@ const components = {
   Component5,
   Component6,
   Component7,
-  Component8
+  Component8,
+  Component9
 };
 
 const currentComponent = shallowRef(Component6);
