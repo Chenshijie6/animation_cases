@@ -1,4 +1,3 @@
-<!-- src/components/菜单.vue -->
 <template>
   <el-aside width="200px">
     <el-menu :default-active="activeMenu" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
@@ -21,7 +20,7 @@
       <!-- 使用计算属性 menuWithoutChildren -->
       <el-menu-item v-for="item in menuWithoutChildren" :key="item.index" :index="item.index">
         <el-icon>
-          <component :is="IconMenu" />
+          <component :is="Setting" />
         </el-icon>
         <span>{{ item.title }}</span>
       </el-menu-item>

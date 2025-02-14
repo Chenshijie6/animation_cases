@@ -3,7 +3,14 @@
   <el-container>
     <Sidebar @menu-select="handleMenuSelect" />
     <el-container>
-      <el-main style="width: calc(100vw - 201px);height:99.5vh;padding: 0;">
+      <el-header style="padding: 20px;height:10px;z-index: 100000;font-size: 20px;background-color: rgb(84,92,100);">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item v-for="(item, index) in breadcrumbItems" :key="index" >
+            {{ item }}
+          </el-breadcrumb-item>
+        </el-breadcrumb>
+      </el-header>
+      <el-main style="width: calc(100vw - 201px);height: calc(99.5vh - 61px);padding: 0;">
         <component :is="currentComponent" />
       </el-main>
     </el-container>
@@ -22,6 +29,7 @@ import Component6 from './components/页面/canvas案例/星空夜景.vue';
 import Component7 from './components/页面/canvas案例/测试页.vue';
 import Component8 from './components/页面/css案例/月光沙漠.vue';
 import Component9 from './components/页面/css案例/时光隧道穿梭.vue';
+import Component10 from './components/页面/canvas案例/类星体探险家.vue';
 
 import menuConfig from './config/menuConfig';
 
@@ -34,12 +42,31 @@ const components = {
   Component6,
   Component7,
   Component8,
-  Component9
+  Component9,
+  Component10
 };
 
 const currentComponent = shallowRef(Component6);
-
+const breadcrumbItems = ref([]);
 const handleMenuSelect = (key) => {
+  let parentMenu = null;
+  let childMenu = null;
+
+  // 查找父级菜单
+  parentMenu = menuConfig.find(item => {
+    if (item.index === key) return true;
+    childMenu = item.children?.find(child => child.index === key);
+    return !!childMenu;
+  });
+
+  // 更新面包屑路径
+  breadcrumbItems.value = [];
+  if (parentMenu) {
+    breadcrumbItems.value.push(parentMenu.title);
+    if (childMenu) {
+      breadcrumbItems.value.push(childMenu.title);
+    }
+  }
   const selectedParentComponent = menuConfig.find(item => item.index === key);
 
   if (selectedParentComponent && selectedParentComponent.component) {
@@ -63,5 +90,8 @@ const handleMenuSelect = (key) => {
 .el-main {
   /* background-color: #000;
   color: #333; */
+}
+:deep(.el-breadcrumb__inner){
+  color:white
 }
 </style>
